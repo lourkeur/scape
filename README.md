@@ -1,9 +1,4 @@
-## sbt project compiled with Dotty
+# Unboxed Try for Scala 3
 
-### Usage
-
-This is a normal sbt project, you can compile code with `sbt compile` and run it
-with `sbt run`, `sbt console` will start a Dotty REPL.
-
-For more information on the sbt-dotty plugin, see the
-[dotty-example-project](https://github.com/lampepfl/dotty-example-project/blob/master/README.md).
+The Try monad is a very useful part of the Scala standard library.
+This library tries to reproduce its interface while avoiding object creation as much as possible.
