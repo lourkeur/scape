@@ -1,5 +1,5 @@
 val catsVersion = "2.1.1"
-val dottyVersion = "0.24.0-RC1"
+val dottyVersion = "0.24.0"
 val scalacheckVersion = "1.14.3"
 
 lazy val root = project
