@@ -1,9 +1,11 @@
 // copied from Scala 2.13.2
 
-package scala.util
+package scala
 
 import org.junit.Test
 import org.junit.Assert._
+
+import utry.{UTry => Try, UFailure => Failure, USuccess => Success}
 
 import scala.annotation.unused
 import scala.tools.testkit.AssertUtil.assertThrows
