@@ -6,7 +6,8 @@ type UFailure[+A] = Throwable
 type USuccess[+A] = WrappedThrowable[A] | A
 type UTry[+A] = UFailure[A] | USuccess[A]
 
-inline def [A](a: A).wrap: USuccess[A] = a match
+// FIXME: inline goes boom
+def [A](a: A).wrap: USuccess[A] = a match
   case _: WrappedThrowable[_] | _: Throwable => WrappedThrowable(a)
   case _ => a
 

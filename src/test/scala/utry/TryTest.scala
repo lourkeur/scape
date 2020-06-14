@@ -81,15 +81,15 @@ class TryTest {
   }
 
   @Test def `flatMap when there is an exception`(): Unit = {
-    assertEquals(Failure(e), Success(1).flatMap[Int](_ => throw e))
+    assertEquals(Failure(e), Success(1).flatMap(_ => throw e))
 
     val e2 = new Exception
-    assertEquals(Failure(e), Failure[Int](e).flatMap[Int](_ => throw e2))
+    assertEquals(Failure(e), Failure[Int](e).flatMap(_ => throw e2))
   }
   @Test def `flatMap when there is a fatal exception`(): Unit = {
     val e3 = new ThreadDeath
     assertThrows[ThreadDeath] {
-      Success(1).flatMap[Int](_ => throw e3)
+      Success(1).flatMap(_ => throw e3)
     }
   }
   @Test def `flatten is a Success(Success)`(): Unit = {
