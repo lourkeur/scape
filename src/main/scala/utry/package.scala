@@ -49,8 +49,8 @@ object UTry:
   extension UTryFoldOps on [A, B](self: UTry[A]):
     def fold(fe: (Throwable) => B, fa: (A) => B): B = try impl.fold(self)(fe)(fa) catch case util.control.NonFatal(e) => fe(e)
 
-  extension UTryFlattenOps on [A <: UTry[B], B](self: UTry[A]):
-    def flatten: UTry[B] = self.fold(e => e)(a => a)
+  extension UTryFlattenOps on [A](self: UTry[UTry[A]]):
+    def flatten: UTry[A] = self.fold(e => e)(a => a)
 
   extension UTryExtractOps on [A, B >: A](self: UTry[A]):
     def getOrElse(default: => B): B = self.fold(_ => default)(a => a)
