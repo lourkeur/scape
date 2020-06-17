@@ -14,10 +14,21 @@ lazy val root = project
     scalaVersion := dottyVersion,
 
     libraryDependencies ++= Seq(
-      ("org.scalacheck" %% "scalacheck" % "1.14.3" % Test).withDottyCompat(dottyVersion),
+      ("org.scalacheck" %% "scalacheck" % scalacheckVersion % Test).withDottyCompat(dottyVersion),
       ("org.typelevel" %% "cats-laws" % catsVersion % Test).withDottyCompat(dottyVersion),
       "org.scala-lang" % "scala-testkit" % scalaTestkitVersion % Test,
       "junit" % "junit" % junitVersion % Test,
       "com.novocode" % "junit-interface" % junitInterfaceVersion % Test,
     ),
   )
+
+lazy val cats = project
+  .settings(
+    scalaVersion := dottyVersion,
+
+    libraryDependencies ++= Seq(
+      ("org.scalacheck" %% "scalacheck" % scalacheckVersion % Test).withDottyCompat(dottyVersion),
+      ("org.typelevel" %% "cats-core" % catsVersion).withDottyCompat(dottyVersion),
+    ),
+  )
+  .dependsOn(root)
