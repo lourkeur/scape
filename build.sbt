@@ -29,6 +29,7 @@ lazy val cats = project
     libraryDependencies ++= Seq(
       ("org.scalacheck" %% "scalacheck" % scalacheckVersion % Test).withDottyCompat(dottyVersion),
       ("org.typelevel" %% "cats-core" % catsVersion).withDottyCompat(dottyVersion),
+      ("org.typelevel" %% "cats-laws" % catsVersion % Test).withDottyCompat(dottyVersion),
     ),
   )
   .dependsOn(root)
