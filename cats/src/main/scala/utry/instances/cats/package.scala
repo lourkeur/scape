@@ -11,7 +11,7 @@ given utryCatsEqForUTry[A: Eq](using Eq[Throwable]) as Eq[UTry[A]]:
     case (USuccess(a1), USuccess(a2)) => Eq.eqv(a1, a2)
     case _ => false
 
-given utryCatsInstancesForUTry as MonadError[UTry, Throwable] with CoflatMap[UTry] with Traverse[UTry] with Monad[UTry]:
+given utryCatsInstancesForUTry as MonadError[UTry, Throwable] with CoflatMap[UTry] with Traverse[UTry]:
   def pure[A](a: A): UTry[A] = USuccess(a)
 
   def flatMap[A, B](x: UTry[A])(f: A => UTry[B]): UTry[B] = x.flatMap(f)
