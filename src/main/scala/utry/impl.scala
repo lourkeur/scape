@@ -7,7 +7,7 @@ type USuccess[+A] = Escape[A] | A
 type UTry[+A] = UFailure[A] | USuccess[A]
 
 inline def escape[A](a: A): USuccess[A] = a match
-  case _: Escape[_] | _: Throwable => Escape(a)
+  case null | _: Escape[_] | _: Throwable => Escape(a)
   case _ => a
 
 // FIXME: inline goes boom

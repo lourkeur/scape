@@ -5,3 +5,7 @@ import cats.instances.all.{given cats.Eq[?]}
 
 object UOptionSuite extends Properties("utry"):
   include(impl.ImplTest[Int, Int].all)
+
+  property("regression test for #2") =
+    USuccess(null).isSuccess
+end UOptionSuite
