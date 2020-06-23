@@ -5,13 +5,20 @@ val junitVersion = "4.12"
 val junitInterfaceVersion = "0.11"
 val scalacheckVersion = "1.14.3"
 
+lazy val common = Seq(
+  scalaVersion := dottyVersion,
+  scalacOptions ++= Seq(
+    "-deprecation",
+    "-Yexplicit-nulls",
+  ),
+)
+
 lazy val root = project
   .in(file("."))
+  .settings(common)
   .settings(
     name := "unboxed-try",
     version := "0.1.0",
-
-    scalaVersion := dottyVersion,
 
     libraryDependencies ++= Seq(
       ("org.scalacheck" %% "scalacheck" % scalacheckVersion % Test).withDottyCompat(dottyVersion),
@@ -23,9 +30,8 @@ lazy val root = project
   )
 
 lazy val cats = project
+  .settings(common)
   .settings(
-    scalaVersion := dottyVersion,
-
     libraryDependencies ++= Seq(
       ("org.scalacheck" %% "scalacheck" % scalacheckVersion % Test).withDottyCompat(dottyVersion),
       ("org.typelevel" %% "cats-core" % catsVersion).withDottyCompat(dottyVersion),
