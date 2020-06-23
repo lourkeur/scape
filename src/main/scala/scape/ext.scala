@@ -1,6 +1,6 @@
-package utry.ext
+package scape.ext
 
-import utry._
+import scape._
 import util.control.NonFatal
 
 extension UTryOps on [A](self: UTry[A]):

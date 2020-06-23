@@ -17,7 +17,7 @@ lazy val root = project
   .in(file("."))
   .settings(common)
   .settings(
-    name := "unboxed-try",
+    name := "scape",
     version := "0.1.0",
 
     libraryDependencies ++= Seq(

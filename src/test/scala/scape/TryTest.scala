@@ -5,7 +5,7 @@ package scala
 import org.junit.Test
 import org.junit.Assert._
 
-import utry.{UTry => Try, UFailure => Failure, USuccess => Success}
+import scape.{UTry => Try, UFailure => Failure, USuccess => Success}
 
 import scala.annotation.unused
 import scala.tools.testkit.AssertUtil.assertThrows

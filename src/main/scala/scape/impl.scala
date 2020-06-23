@@ -1,4 +1,4 @@
-package utry.impl
+package scape.impl
 
 case class Escape[+A](unescape: A)
 

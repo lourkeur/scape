@@ -1,4 +1,4 @@
-package utry.impl
+package scape.impl
 
 import cats.kernel.laws.IsEqArrow
 

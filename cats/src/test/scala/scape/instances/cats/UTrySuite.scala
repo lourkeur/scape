@@ -1,11 +1,11 @@
-package utry.instances.cats
+package scape.instances.cats
 
 import org.scalacheck._
 import cats.kernel.laws.discipline._
 import cats.laws.discipline._
 import cats.instances.all._
 import cats._
-import utry._
+import scape._
 import scala.util._
 
 given [A: Arbitrary] as Arbitrary[UTry[A]] = Arbitrary {

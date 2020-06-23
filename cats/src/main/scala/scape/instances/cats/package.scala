@@ -1,17 +1,17 @@
-package utry.instances.cats
+package scape.instances.cats
 
 import cats._
-import utry._
+import scape._
 import util.control.NonFatal
 import scala.implicits.Not
 
-given utryCatsEqForUTry[A: Eq](using Eq[Throwable]) as Eq[UTry[A]]:
+given scapeCatsEqForUTry[A: Eq](using Eq[Throwable]) as Eq[UTry[A]]:
   def eqv(x: UTry[A], y: UTry[A]) = (x, y) match
     case (UFailure(e1), UFailure(e2)) => Eq.eqv(e1, e2)
     case (USuccess(a1), USuccess(a2)) => Eq.eqv(a1, a2)
     case _ => false
 
-given utryCatsInstancesForUTry as MonadError[UTry, Throwable] with CoflatMap[UTry] with Traverse[UTry]:
+given scapeCatsInstancesForUTry as MonadError[UTry, Throwable] with CoflatMap[UTry] with Traverse[UTry]:
   def pure[A](a: A): UTry[A] = USuccess(a)
 
   def flatMap[A, B](x: UTry[A])(f: A => UTry[B]): UTry[B] = x.flatMap(f)
@@ -51,12 +51,12 @@ given utryCatsInstancesForUTry as MonadError[UTry, Throwable] with CoflatMap[UTr
     x match
       case UFailure(e) => UFailure(e).pure
       case USuccess(a) => f(a).map(USuccess(_))
-end utryCatsInstancesForUTry
+end scapeCatsInstancesForUTry
 
-given utryCatsSemigroupForUTry[A: Semigroup](using Not[Monoid[A]]) as SemigroupCommon[A] with Semigroup[UTry[A]]:
+given scapeCatsSemigroupForUTry[A: Semigroup](using Not[Monoid[A]]) as SemigroupCommon[A] with Semigroup[UTry[A]]:
   val A = Semigroup[A]
 
-given utryCatsMonoidForUTry[A: Monoid] as SemigroupCommon[A] with Monoid[UTry[A]]:
+given scapeCatsMonoidForUTry[A: Monoid] as SemigroupCommon[A] with Monoid[UTry[A]]:
   val A: Monoid[A] = summon
   def empty = USuccess(A.empty)
 
@@ -68,7 +68,7 @@ private abstract class SemigroupCommon[A] extends Semigroup[UTry[A]]:
       a2 <- y
     yield A.combine(a1, a2)
 
-given utryCatsShowForUTry[A: Show](using Show[Throwable]) as Show[UTry[A]]:
+given scapeCatsShowForUTry[A: Show](using Show[Throwable]) as Show[UTry[A]]:
   import cats.syntax.show._
   def show(x: UTry[A]) = x match
     case UFailure(e) => show"UFailure($e)"

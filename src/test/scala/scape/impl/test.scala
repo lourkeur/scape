@@ -1,4 +1,4 @@
-package utry.impl
+package scape.impl
 
 import org.scalacheck._
 import Prop.forAll
