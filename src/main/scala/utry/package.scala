@@ -8,8 +8,8 @@ opaque type UTry[+A] = impl.UTry[A]
 
 object UFailure:
   def apply[A](e: Throwable): UTry[A] = e
-  def unapply[A](ta: UTry[A] & Throwable): Some[Throwable] =
-    Some(ta)
+  def unapply[A](ta: UTry[A]): Option[Throwable] =
+    impl.fold(ta)(Some(_))(_ => None)
 
 object USuccess:
   def apply[A](a: A): UTry[A] = impl.escape(a)
