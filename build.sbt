@@ -1,4 +1,4 @@
-val catsVersion = "2.1.1"
+val catsVersion = "2.2.0-M3"
 val dottyVersion = "0.24.0"
 val scalaTestkitVersion = "2.13.2"
 val junitVersion = "4.12"
