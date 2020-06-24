@@ -19,10 +19,15 @@ lazy val root = project
   .settings(
     name := "scape",
     version := "0.1.0",
+  )
 
+lazy val tests = project
+  .dependsOn(root, cats)
+  .settings(common)
+  .settings(
     libraryDependencies ++= Seq(
-      ("org.scalacheck" %% "scalacheck" % scalacheckVersion % Test).withDottyCompat(dottyVersion),
-      ("org.typelevel" %% "cats-laws" % catsVersion % Test).withDottyCompat(dottyVersion),
+      ("org.scalacheck" %% "scalacheck" % scalacheckVersion).withDottyCompat(dottyVersion),
+      ("org.typelevel" %% "cats-laws" % catsVersion).withDottyCompat(dottyVersion),
       "org.scala-lang" % "scala-testkit" % scalaTestkitVersion % Test,
       "junit" % "junit" % junitVersion % Test,
       "com.novocode" % "junit-interface" % junitInterfaceVersion % Test,
@@ -31,11 +36,9 @@ lazy val root = project
 
 lazy val cats = project
   .settings(common)
+  .dependsOn(root)
   .settings(
     libraryDependencies ++= Seq(
-      ("org.scalacheck" %% "scalacheck" % scalacheckVersion % Test).withDottyCompat(dottyVersion),
       ("org.typelevel" %% "cats-core" % catsVersion).withDottyCompat(dottyVersion),
-      ("org.typelevel" %% "cats-laws" % catsVersion % Test).withDottyCompat(dottyVersion),
     ),
   )
-  .dependsOn(root)
