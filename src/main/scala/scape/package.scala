@@ -2,19 +2,21 @@ package scape
 
 import util.control.NonFatal
 
-opaque type UFailure[+A] <: UTry[A] = impl.UFailure[A]
-opaque type USuccess[+A] <: UTry[A] = impl.USuccess[A]
-opaque type UTry[+A] = impl.UTry[A]
+opaque type UFailure[+A] = Throwable
+opaque type USuccess[+A] = A | Escape[A]
+opaque type UTry[+A] = UFailure[A] | USuccess[A]
+
+given Impl[Throwable]
 
 object UFailure:
   def apply[A](e: Throwable): UTry[A] = e
   def unapply[A](ta: UTry[A]): Option[Throwable] =
-    impl.fold(ta)(Some(_))(_ => None)
+    ta.fold(Some(_))(_ => None)
 
 object USuccess:
-  def apply[A](a: A): UTry[A] = impl.escape(a)
+  def apply[A](a: A): UTry[A] = a.escape
   def unapply[A](ta: UTry[A]): Option[A] =
-    impl.fold(ta)(_ => None)(Some[A])
+    ta.fold(_ => None)(Some[A])
 
 object UTry:
   def apply[A](a: => A): UTry[A] =
